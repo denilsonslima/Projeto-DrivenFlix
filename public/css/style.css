@@ -195,6 +195,10 @@
     margin-right: 6px;
   }
   
+  #coracao {
+    color: red;
+  }
+
   .post .fundo .curtidas {
     display: flex;
     align-items: center;

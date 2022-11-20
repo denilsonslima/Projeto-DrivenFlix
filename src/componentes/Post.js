@@ -1,48 +1,71 @@
+import { useState } from "react"
+
 export default function Post() {
     const post = [
-        { imagem: "assets/img/meowed.svg", user: "meowed", conteudo: "assets/img/gato-telefone.svg", logo: "assets/img/respondeai.svg", info: "respondeai", like: "outras 101.523 pessoas" },
-        { imagem: "assets/img/barked.svg", user: "barked", conteudo: "assets/img/dog.svg", logo: "assets/img/adorable_animals.svg", info: "adorable_animals", like: "outras 99.159 pessoas" }
+        { imagem: "assets/img/meowed.svg", user: "meowed", conteudo: "assets/img/gato-telefone.svg", logo: "assets/img/respondeai.svg", info: "respondeai", like: "101523" },
+        { imagem: "assets/img/barked.svg", user: "barked", conteudo: "assets/img/dog.svg", logo: "assets/img/adorable_animals.svg", info: "adorable_animals", like: "99159" }
     ]
     return (
-        <div class="posts">
-            {post.map((p)=> <Posts post={p} />)}
+        <div className="posts">
+            {post.map((p)=> <Posts key={p.user} post={p} />)}
         </div>
     )
 }
 
 function Posts(props){
+    const [salvar, setSalvar] = useState("bookmark-outline")
+    const [curtir, setCurtir] = useState("heart-outline")
+
+    function salvarPost(){
+        let clicado = "bookmark"
+        let desClicado = "bookmark-outline"
+        if(salvar == desClicado){
+            setSalvar(clicado)
+        } else setSalvar(desClicado) 
+    }
+
+    function curtirPost(){
+        let clicado = "heart"
+        let desClicado = "heart-outline"
+        if(curtir == desClicado){
+            setCurtir(clicado)
+        } else {
+            setCurtir(desClicado)
+        }
+    }
+
     return (
-        <div class="post">
-                <div class="topo">
-                    <div class="usuario">
+        <div className="post" data-test="post">
+                <div className="topo">
+                    <div className="usuario">
                         <img src={props.post.imagem} />
                         {props.post.user}
                     </div>
-                    <div class="acoes">
+                    <div className="acoes">
                         <ion-icon name="ellipsis-horizontal"></ion-icon>
                     </div>
                 </div>
 
-                <div class="conteudo">
-                    <img src={props.post.conteudo} />
+                <div className="conteudo">
+                    <img src={props.post.conteudo} dblClick={curtirPost}/>
                 </div>
 
-                <div class="fundo">
-                    <div class="acoes">
+                <div className="fundo">
+                    <div className="acoes">
                         <div>
-                            <ion-icon name="heart-outline"></ion-icon>
+                            <ion-icon data-test="like-post" name={curtir} style={curtir == "heart"? { color: "#ed4956" } : {}} onClick={curtirPost}></ion-icon>
                             <ion-icon name="chatbubble-outline"></ion-icon>
                             <ion-icon name="paper-plane-outline"></ion-icon>
                         </div>
                         <div>
-                            <ion-icon name="bookmark-outline"></ion-icon>
+                            <ion-icon data-test="save-post" name={salvar} onClick={salvarPost}></ion-icon>
                         </div>
                     </div>
 
-                    <div class="curtidas">
+                    <div className="curtidas">
                         <img src={props.post.logo} />
-                        <div class="texto">
-                            Curtido por <strong>{props.post.info}</strong> e <strong>{props.post.like}</strong>
+                        <div className="texto" data-test="likes-number">
+                            Curtido por <strong>{props.post.info}</strong> e <strong>{curtir == "heart"? Number(props.post.like) + 1: Number(props.post.like)} </strong> pessoas
                         </div>
                     </div>
                 </div>

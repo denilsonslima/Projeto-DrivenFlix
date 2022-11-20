@@ -11,9 +11,9 @@ export default function Stories() {
 
     ]
     return (
-        <div class="stories">
-            {stories.map((s) => <Story imagem={s.imagem} user={s.user} />)}
-            <div class="setinha">
+        <div className="stories">
+            {stories.map((s) => <Story key={s.user} imagem={s.imagem} user={s.user} />)}
+            <div className="setinha">
                 <ion-icon name="chevron-forward-circle"></ion-icon>
             </div>
         </div>
@@ -22,11 +22,11 @@ export default function Stories() {
 
 function Story(props) {
     return (
-        <div class="story">
-            <div class="imagem">
+        <div className="story">
+            <div className="imagem">
                 <img src={props.imagem} />
             </div>
-            <div class="usuario">
+            <div className="usuario">
                 {props.user}
             </div>
         </div>
