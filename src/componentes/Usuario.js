@@ -20,17 +20,13 @@ export default function Usuario(){
     return (
         <div className="usuario" data-test="user">
                 <img data-test="profile-image" src={link} onClick={mudarPerfil}/>
-                <div className="texto">
+                <div className="texto" data-test="name">
                     <strong>catanacomics</strong>
-                    <span data-test="name">
+                    <span>
                         {user}
-                        <ion-icon test="edit-name" name="pencil" onClick={meuEvento}></ion-icon>
+                        <ion-icon data-test="edit-name" name="pencil" onClick={meuEvento}></ion-icon>
                     </span>
                 </div>
             </div>
     )
-}
-
-function mudarNome(){
-    prompt("Deu Certo: ")
 }
