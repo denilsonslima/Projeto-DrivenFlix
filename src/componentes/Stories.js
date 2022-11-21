@@ -1,3 +1,5 @@
+import Story from "./Story"
+
 export default function Stories() {
     const stories = [
         { imagem: "assets/img/9gag.svg", user: "9gag" },
@@ -20,15 +22,3 @@ export default function Stories() {
     )
 }
 
-function Story(props) {
-    return (
-        <div className="story">
-            <div className="imagem">
-                <img src={props.imagem} />
-            </div>
-            <div className="usuario">
-                {props.user}
-            </div>
-        </div>
-    )
-}
